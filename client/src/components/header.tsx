@@ -18,8 +18,8 @@ export default function Header() {
         <div className="flex items-center">
           <Link href="/">
             <a className="flex items-center">
-              <i className="ri-home-4-line text-primary text-2xl mr-2"></i>
-              <span className="font-bold text-xl text-primary">AptConnect</span>
+              <i className="ri-magic-line text-primary text-2xl mr-2"></i>
+              <span className="font-bold text-xl text-primary">HomeGenie</span>
             </a>
           </Link>
         </div>

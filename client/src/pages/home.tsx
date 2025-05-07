@@ -47,7 +47,7 @@ export default function Home() {
             <h1 className="text-white text-2xl md:text-4xl font-bold mb-2">
               {isAuthenticated 
                 ? `Welcome back, ${user?.fullName.split(' ')[0]}` 
-                : "Welcome to AptConnect"}
+                : "Welcome to HomeGenie"}
             </h1>
             <p className="text-white text-sm md:text-base mb-4">
               {isAuthenticated 
