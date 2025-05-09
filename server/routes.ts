@@ -212,9 +212,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/appointments", isAuthenticated, async (req, res) => {
     try {
+      console.log("Appointment request body:", JSON.stringify(req.body));
       const user = req.user as any;
+      
+      // Format date properly if it's a string or Date object
+      let formattedData = { ...req.body };
+      if (formattedData.date) {
+        if (typeof formattedData.date === 'string') {
+          formattedData.date = new Date(formattedData.date);
+        } else if (formattedData.date instanceof Date) {
+          // Keep as is, but ensure it's valid
+          if (isNaN(formattedData.date.getTime())) {
+            return res.status(400).json({ message: "Invalid date format" });
+          }
+        }
+      }
+      
+      console.log("Formatted appointment data:", JSON.stringify({
+        ...formattedData,
+        userId: user.id,
+        date: formattedData.date ? formattedData.date.toISOString() : null
+      }));
+      
       const appointmentData = insertAppointmentSchema.parse({
-        ...req.body,
+        ...formattedData,
         userId: user.id,
       });
       
@@ -222,8 +243,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(appointment);
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.error("Zod validation error:", JSON.stringify(error.errors));
         return res.status(400).json({ message: error.errors });
       }
+      console.error("Server error:", error);
       res.status(500).json({ message: "Server error creating appointment" });
     }
   });
