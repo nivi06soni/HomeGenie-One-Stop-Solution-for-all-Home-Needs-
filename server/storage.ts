@@ -397,4 +397,194 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Database implementation
+import { db } from "./db";
+import { 
+  users, serviceCategories, serviceProviders, 
+  appointments, communityPosts, postTags, postLikes,
+  appointmentStatusEnum
+} from "@shared/schema";
+import { eq, and, desc } from "drizzle-orm";
+
+export class DatabaseStorage implements IStorage {
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values({
+        ...insertUser,
+        createdAt: new Date(),
+      })
+      .returning();
+    return user;
+  }
+
+  async getAllCategories(): Promise<ServiceCategory[]> {
+    return await db.select().from(serviceCategories);
+  }
+
+  async getCategoryById(id: number): Promise<ServiceCategory | undefined> {
+    const [category] = await db.select().from(serviceCategories).where(eq(serviceCategories.id, id));
+    return category || undefined;
+  }
+
+  async createCategory(insertCategory: InsertServiceCategory): Promise<ServiceCategory> {
+    const [category] = await db
+      .insert(serviceCategories)
+      .values(insertCategory)
+      .returning();
+    return category;
+  }
+
+  async getAllServiceProviders(): Promise<ServiceProvider[]> {
+    return await db.select().from(serviceProviders);
+  }
+
+  async getServiceProvidersByCategory(categoryId: number): Promise<ServiceProvider[]> {
+    return await db.select().from(serviceProviders).where(eq(serviceProviders.categoryId, categoryId));
+  }
+
+  async getServiceProviderById(id: number): Promise<ServiceProvider | undefined> {
+    const [provider] = await db.select().from(serviceProviders).where(eq(serviceProviders.id, id));
+    return provider || undefined;
+  }
+
+  async createServiceProvider(insertProvider: InsertServiceProvider): Promise<ServiceProvider> {
+    const [provider] = await db
+      .insert(serviceProviders)
+      .values(insertProvider)
+      .returning();
+    return provider;
+  }
+
+  async getAppointmentsByUserId(userId: number): Promise<Appointment[]> {
+    return await db.select().from(appointments).where(eq(appointments.userId, userId));
+  }
+
+  async getAppointmentById(id: number): Promise<Appointment | undefined> {
+    const [appointment] = await db.select().from(appointments).where(eq(appointments.id, id));
+    return appointment || undefined;
+  }
+
+  async createAppointment(insertAppointment: InsertAppointment): Promise<Appointment> {
+    const [appointment] = await db
+      .insert(appointments)
+      .values({
+        ...insertAppointment,
+        createdAt: new Date(),
+      })
+      .returning();
+    return appointment;
+  }
+
+  async updateAppointmentStatus(id: number, status: string): Promise<Appointment | undefined> {
+    const [updatedAppointment] = await db
+      .update(appointments)
+      .set({ status: status as typeof appointmentStatusEnum.enumValues[number] })
+      .where(eq(appointments.id, id))
+      .returning();
+    return updatedAppointment || undefined;
+  }
+
+  async getAllCommunityPosts(): Promise<CommunityPost[]> {
+    return await db.select().from(communityPosts).orderBy(desc(communityPosts.createdAt));
+  }
+
+  async getCommunityPostById(id: number): Promise<CommunityPost | undefined> {
+    const [post] = await db.select().from(communityPosts).where(eq(communityPosts.id, id));
+    return post || undefined;
+  }
+
+  async createCommunityPost(insertPost: InsertCommunityPost): Promise<CommunityPost> {
+    const [post] = await db
+      .insert(communityPosts)
+      .values({
+        ...insertPost,
+        likesCount: 0,
+        commentsCount: 0,
+        createdAt: new Date(),
+      })
+      .returning();
+    return post;
+  }
+
+  async incrementPostLikes(postId: number): Promise<CommunityPost | undefined> {
+    const post = await this.getCommunityPostById(postId);
+    if (!post) return undefined;
+    
+    const [updatedPost] = await db
+      .update(communityPosts)
+      .set({ likesCount: post.likesCount + 1 })
+      .where(eq(communityPosts.id, postId))
+      .returning();
+    return updatedPost || undefined;
+  }
+
+  async incrementPostComments(postId: number): Promise<CommunityPost | undefined> {
+    const post = await this.getCommunityPostById(postId);
+    if (!post) return undefined;
+    
+    const [updatedPost] = await db
+      .update(communityPosts)
+      .set({ commentsCount: post.commentsCount + 1 })
+      .where(eq(communityPosts.id, postId))
+      .returning();
+    return updatedPost || undefined;
+  }
+
+  async getTagsByPostId(postId: number): Promise<PostTag[]> {
+    return await db.select().from(postTags).where(eq(postTags.postId, postId));
+  }
+
+  async createPostTag(insertTag: InsertPostTag): Promise<PostTag> {
+    const [tag] = await db
+      .insert(postTags)
+      .values(insertTag)
+      .returning();
+    return tag;
+  }
+
+  async getPostLikesByUser(userId: number): Promise<PostLike[]> {
+    return await db.select().from(postLikes).where(eq(postLikes.userId, userId));
+  }
+
+  async createPostLike(insertLike: InsertPostLike): Promise<PostLike> {
+    const [like] = await db
+      .insert(postLikes)
+      .values(insertLike)
+      .returning();
+    return like;
+  }
+
+  async deletePostLike(postId: number, userId: number): Promise<boolean> {
+    const result = await db
+      .delete(postLikes)
+      .where(and(eq(postLikes.postId, postId), eq(postLikes.userId, userId)));
+    return true;
+  }
+
+  async hasUserLikedPost(postId: number, userId: number): Promise<boolean> {
+    const [like] = await db
+      .select()
+      .from(postLikes)
+      .where(and(eq(postLikes.postId, postId), eq(postLikes.userId, userId)));
+    return !!like;
+  }
+}
+
+// Use Database Storage instead of Memory Storage
+export const storage = new DatabaseStorage();
