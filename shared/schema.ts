@@ -10,6 +10,7 @@ export const users = pgTable("users", {
   fullName: text("full_name").notNull(),
   email: text("email").notNull().unique(),
   apartmentNumber: text("apartment_number"),
+  apartmentName: text("apartment_name"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

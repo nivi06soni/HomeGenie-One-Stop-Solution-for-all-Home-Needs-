@@ -115,6 +115,20 @@ export default function Register() {
                   )}
                 />
               </div>
+              
+              <FormField
+                control={form.control}
+                name="apartmentName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Apartment Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Ashiana Gardens" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="password"

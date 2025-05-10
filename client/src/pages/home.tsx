@@ -158,6 +158,69 @@ export default function Home() {
             )}
           </div>
         </section>
+
+        {/* Testimonials */}
+        <section className="mb-10 bg-gradient-to-r from-primary-50 to-blue-50 py-8 px-4 rounded-xl">
+          <h2 className="text-xl font-bold mb-6 text-center">What Our Customers Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white p-5 rounded-lg shadow-sm">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-3">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Testimonial" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h4 className="font-semibold">Amit Sharma</h4>
+                  <div className="flex text-yellow-400 text-sm">
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <p className="text-gray-600">"Kumar Electrical fixed my air conditioning in just one hour. Very professional service and reasonable rates. Highly recommended!"</p>
+            </div>
+            
+            <div className="bg-white p-5 rounded-lg shadow-sm">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-3">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Testimonial" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h4 className="font-semibold">Priya Patel</h4>
+                  <div className="flex text-yellow-400 text-sm">
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-half-fill"></i>
+                  </div>
+                </div>
+              </div>
+              <p className="text-gray-600">"Raj Plumbing Services helped me with a major leak emergency. They arrived within 30 minutes and fixed everything perfectly. Great service!"</p>
+            </div>
+            
+            <div className="bg-white p-5 rounded-lg shadow-sm">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gray-200 rounded-full overflow-hidden mr-3">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Testimonial" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h4 className="font-semibold">Rajesh Verma</h4>
+                  <div className="flex text-yellow-400 text-sm">
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
+                    <i className="ri-star-line"></i>
+                  </div>
+                </div>
+              </div>
+              <p className="text-gray-600">"Sharma Painting did a wonderful job repainting my entire apartment. They were punctual, clean, and the results exceeded my expectations."</p>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
