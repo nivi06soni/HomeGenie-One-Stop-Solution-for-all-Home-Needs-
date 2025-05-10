@@ -31,12 +31,23 @@ export default function Header() {
           <Link href="/book">
             <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Book</a>
           </Link>
-          <Link href="/appointments">
-            <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Appointments</a>
-          </Link>
           <Link href="/customer-care">
             <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Customer Care</a>
           </Link>
+        </div>
+        
+        <div className="relative hidden md:flex mx-4">
+          <div className="flex items-center bg-gray-100 rounded-full pl-4 pr-12 py-2">
+            <i className="ri-search-line text-gray-500 mr-2"></i>
+            <input 
+              type="text" 
+              placeholder="Search services..." 
+              className="bg-transparent outline-none w-64"
+            />
+          </div>
+          <button className="absolute right-0 top-0 bottom-0 bg-primary text-white rounded-full px-4 flex items-center justify-center">
+            <i className="ri-search-line"></i>
+          </button>
         </div>
         
         <div className="flex items-center space-x-2">
