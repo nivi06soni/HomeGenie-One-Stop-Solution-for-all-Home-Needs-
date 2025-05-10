@@ -75,13 +75,39 @@ export default function Home() {
                 </Link>
                 <Link href="/customer-care">
                   <Button variant="outline" className="bg-white hover:bg-gray-100 text-primary flex items-center">
-                    <i className="ri-customer-service-2-line mr-2"></i> Customer Care
+                    <i className="ri-customer-service-2-line mr-2"></i> Support
                   </Button>
                 </Link>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Special Offer Section */}
+        {!isAuthenticated && (
+          <section className="mb-8">
+            <div className="bg-gradient-to-r from-amber-50 to-amber-100 border border-amber-200 rounded-xl p-5 shadow-sm">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="bg-gradient-to-br from-amber-500 to-orange-500 text-white p-4 rounded-full mb-4 md:mb-0 md:mr-6">
+                  <i className="ri-gift-line text-3xl"></i>
+                </div>
+                <div className="text-center md:text-left md:flex-1">
+                  <h3 className="text-xl font-bold text-amber-800 mb-1">Special Offer for New Users!</h3>
+                  <p className="text-amber-700 mb-2">Register today and get <span className="font-bold">15% OFF</span> on your first service booking.</p>
+                  <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                    <span className="inline-flex items-center bg-white px-3 py-1 rounded-full border border-amber-200 font-mono text-amber-800 text-sm">
+                      <span className="mr-2">Use code:</span>
+                      <span className="font-bold">WELCOME15</span>
+                    </span>
+                    <Link href="/register">
+                      <Button variant="default" size="sm" className="bg-amber-600 hover:bg-amber-700">Sign Up Now</Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Services */}
         <section className="mb-10">
