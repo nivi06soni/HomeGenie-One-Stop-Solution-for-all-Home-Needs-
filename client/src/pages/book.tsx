@@ -209,6 +209,49 @@ export default function Book() {
               </div>
             )}
             
+            {/* Location Information */}
+            {selectedProviderId && (
+              <div className="mb-6">
+                <h3 className="font-medium text-text-secondary mb-3">Service Address</h3>
+                
+                <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                  <div className="flex items-center mb-3">
+                    <Button type="button" variant="outline" size="sm" className="flex items-center gap-2">
+                      <i className="ri-map-pin-line"></i>
+                      Use Current Location
+                    </Button>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-1 block">Floor Number</label>
+                      <Input placeholder="e.g., 3rd Floor" className="w-full" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-1 block">Apartment Number</label>
+                      <Input placeholder="e.g., 304" className="w-full" />
+                    </div>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <label className="text-sm font-medium text-gray-700 mb-1 block">Apartment Name</label>
+                    <Input placeholder="e.g., Sunshine Towers" className="w-full" />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-1 block">Landmark</label>
+                      <Input placeholder="e.g., Near City Mall" className="w-full" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-1 block">Pincode</label>
+                      <Input placeholder="e.g., 400001" className="w-full" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {/* Issue Description */}
             {selectedProviderId && (
               <div className="mb-6">

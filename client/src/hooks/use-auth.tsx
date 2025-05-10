@@ -32,7 +32,12 @@ export const loginSchema = z.object({
 export const registerSchema = insertUserSchema.extend({
   password: z.string().min(6, "Password must be at least 6 characters"),
   confirmPassword: z.string(),
+  phoneNumber: z.string().optional(),
   apartmentName: z.string().optional(),
+  apartmentNumber: z.string().optional(),
+  floorNumber: z.string().optional(),
+  landmark: z.string().optional(),
+  pincode: z.string().optional(),
 }).refine(data => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
