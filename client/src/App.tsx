@@ -11,6 +11,7 @@ import Register from "@/pages/register";
 import Profile from "@/pages/profile";
 import Appointments from "@/pages/appointments";
 import CustomerCare from "@/pages/customer-care";
+import AboutUs from "@/pages/about-us";
 import Header from "@/components/header";
 import MobileNav from "@/components/mobile-nav";
 import { AuthProvider } from "@/hooks/use-auth";
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/book" component={Book} />
       <Route path="/appointments" component={Appointments} />
       <Route path="/customer-care" component={CustomerCare} />
+      <Route path="/about-us" component={AboutUs} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/profile" component={Profile} />

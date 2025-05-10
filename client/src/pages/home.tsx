@@ -73,11 +73,6 @@ export default function Home() {
                     <i className="ri-calendar-line mr-2"></i> Book Appointment
                   </Button>
                 </Link>
-                <Link href="/customer-care">
-                  <Button variant="outline" className="bg-white hover:bg-gray-100 text-primary flex items-center">
-                    <i className="ri-customer-service-2-line mr-2"></i> Support
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
