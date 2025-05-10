@@ -41,7 +41,13 @@ export default function Header() {
           </Link>
         </div>
         
-        <div className="relative hidden md:flex mx-4">
+        <form className="relative hidden md:flex mx-4" onSubmit={(e) => {
+          e.preventDefault();
+          const searchInput = e.currentTarget.querySelector('input');
+          if (searchInput && searchInput.value) {
+            window.location.href = `/book?search=${encodeURIComponent(searchInput.value)}`;
+          }
+        }}>
           <div className="flex items-center bg-gray-100 rounded-full pl-4 pr-12 py-2">
             <i className="ri-search-line text-gray-500 mr-2"></i>
             <input 
@@ -50,10 +56,12 @@ export default function Header() {
               className="bg-transparent outline-none w-64"
             />
           </div>
-          <button className="absolute right-0 top-0 bottom-0 bg-primary hover:bg-primary/90 text-white rounded-full px-4 flex items-center justify-center transition-colors">
+          <button 
+            type="submit"
+            className="absolute right-0 top-0 bottom-0 bg-primary hover:bg-primary/90 text-white rounded-full px-4 flex items-center justify-center transition-colors">
             <i className="ri-search-line"></i>
           </button>
-        </div>
+        </form>
         
         <div className="flex items-center space-x-2">
           {isAuthenticated ? (

@@ -79,6 +79,11 @@ export default function Footer() {
                   <a className="text-gray-600 hover:text-primary">Support</a>
                 </Link>
               </li>
+              <li>
+                <Link href="/about-us">
+                  <a className="text-gray-600 hover:text-primary">About Us</a>
+                </Link>
+              </li>
             </ul>
           </div>
           

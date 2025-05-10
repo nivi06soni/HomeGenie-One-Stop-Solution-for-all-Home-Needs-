@@ -51,8 +51,7 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
         {provider.dailyRate !== null && provider.dailyRate !== undefined && (
           <div className="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-md font-medium text-sm mb-3 flex items-center">
             <i className="ri-money-rupee-circle-line mr-1.5"></i>
-            <span>₹{formatRate(provider.dailyRate)}/day</span>
-            <span className="ml-1 text-xs text-green-700 font-normal">(Budget Friendly)</span>
+            <span>₹{formatRate(provider.dailyRate)}/visit</span>
           </div>
         )}
         

@@ -39,8 +39,7 @@ export default function Book() {
 
   // Query providers by category
   const { data: providers, isLoading: providersLoading } = useQuery<ServiceProvider[]>({
-    queryKey: ["/api/providers", selectedCategoryId ? `categoryId=${selectedCategoryId}` : ""],
-    enabled: !!selectedCategoryId,
+    queryKey: ["/api/providers", selectedCategoryId ? `?categoryId=${selectedCategoryId}` : ""],
   });
 
   // Get a specific provider when providerId is provided in query
