@@ -26,7 +26,8 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
       <div className="p-4">
         <h3 className="font-semibold text-lg">{provider.name}</h3>
         <p className="text-text-secondary text-sm mb-2">{provider.description}</p>
-        <div className="flex items-center text-xs text-text-secondary mb-3">
+        
+        <div className="flex items-center text-xs text-text-secondary mb-2">
           {provider.badgeOne && (
             <span className="flex items-center mr-2">
               <i className="ri-time-line mr-1"></i> {provider.badgeOne}
@@ -38,6 +39,16 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
             </span>
           )}
         </div>
+        
+        {provider.hourlyRate !== null && provider.hourlyRate !== undefined && (
+          <div className="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-md font-medium text-sm mb-3 flex items-center">
+            <i className="ri-money-rupee-circle-line mr-1.5"></i>
+            <span>₹{typeof provider.hourlyRate === 'number' 
+              ? provider.hourlyRate.toFixed(2) 
+              : String(provider.hourlyRate)}/hour</span>
+          </div>
+        )}
+        
         <Link href={`/book?provider=${provider.id}`}>
           <Button variant="outline" className="w-full text-primary">
             Book Now

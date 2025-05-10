@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, pgEnum, decimal } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -43,6 +43,7 @@ export const serviceProviders = pgTable("service_providers", {
   responseTime: text("response_time"),
   badgeOne: text("badge_one"),
   badgeTwo: text("badge_two"),
+  hourlyRate: decimal("hourly_rate", { precision: 10, scale: 2 }),
 });
 
 export const insertServiceProviderSchema = createInsertSchema(serviceProviders).omit({
