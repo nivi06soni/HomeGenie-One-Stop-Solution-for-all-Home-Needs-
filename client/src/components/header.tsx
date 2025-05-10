@@ -31,11 +31,11 @@ export default function Header() {
           <Link href="/book">
             <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Book</a>
           </Link>
-          <Link href="/community">
-            <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Community</a>
+          <Link href="/appointments">
+            <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Appointments</a>
           </Link>
-          <Link href="/history">
-            <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">History</a>
+          <Link href="/customer-care">
+            <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Customer Care</a>
           </Link>
         </div>
         

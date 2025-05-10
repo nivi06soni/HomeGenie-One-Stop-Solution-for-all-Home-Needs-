@@ -6,11 +6,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Book from "@/pages/book";
-import Community from "@/pages/community";
-import History from "@/pages/history";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import Profile from "@/pages/profile";
+import Appointments from "@/pages/appointments";
+import CustomerCare from "@/pages/customer-care";
 import Header from "@/components/header";
 import MobileNav from "@/components/mobile-nav";
 import { AuthProvider } from "@/hooks/use-auth";
@@ -20,8 +20,8 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/book" component={Book} />
-      <Route path="/community" component={Community} />
-      <Route path="/history" component={History} />
+      <Route path="/appointments" component={Appointments} />
+      <Route path="/customer-care" component={CustomerCare} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/profile" component={Profile} />

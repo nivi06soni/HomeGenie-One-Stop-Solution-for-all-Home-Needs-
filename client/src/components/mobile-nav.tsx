@@ -7,8 +7,8 @@ export default function MobileNav() {
   const navItems = [
     { href: "/", icon: "ri-home-4-line", label: "Home" },
     { href: "/book", icon: "ri-calendar-line", label: "Book" },
-    { href: "/community", icon: "ri-team-line", label: "Community" },
-    { href: "/history", icon: "ri-history-line", label: "History" },
+    { href: "/appointments", icon: "ri-file-list-3-line", label: "Appointments" },
+    { href: "/customer-care", icon: "ri-customer-service-2-line", label: "Support" },
   ];
 
   return (
