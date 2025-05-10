@@ -48,7 +48,7 @@ export const serviceProviders = pgTable("service_providers", {
   responseTime: text("response_time"),
   badgeOne: text("badge_one"),
   badgeTwo: text("badge_two"),
-  hourlyRate: decimal("hourly_rate", { precision: 10, scale: 2 }),
+  dailyRate: decimal("daily_rate", { precision: 10, scale: 2 }),
 });
 
 export const insertServiceProviderSchema = createInsertSchema(serviceProviders).omit({

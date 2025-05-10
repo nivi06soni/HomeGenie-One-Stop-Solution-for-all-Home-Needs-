@@ -18,8 +18,11 @@ export default function Header() {
         <div className="flex items-center">
           <Link href="/">
             <a className="flex items-center">
-              <i className="ri-magic-line text-primary text-2xl mr-2"></i>
-              <span className="font-bold text-xl text-primary">HomeGenie</span>
+              <i className="ri-home-smile-fill text-primary text-2xl mr-2"></i>
+              <span className="font-bold text-xl">
+                <span className="text-primary">Home</span>
+                <span className="text-indigo-600">Genie</span>
+              </span>
             </a>
           </Link>
         </div>
@@ -32,7 +35,9 @@ export default function Header() {
             <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Book</a>
           </Link>
           <Link href="/customer-care">
-            <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium">Customer Care</a>
+            <a className="px-4 py-2 rounded-md hover:bg-gray-100 transition font-medium flex items-center">
+              <i className="ri-customer-service-2-line mr-1"></i> Support
+            </a>
           </Link>
         </div>
         
@@ -41,11 +46,11 @@ export default function Header() {
             <i className="ri-search-line text-gray-500 mr-2"></i>
             <input 
               type="text" 
-              placeholder="Search services..." 
+              placeholder="Search services or providers..." 
               className="bg-transparent outline-none w-64"
             />
           </div>
-          <button className="absolute right-0 top-0 bottom-0 bg-primary text-white rounded-full px-4 flex items-center justify-center">
+          <button className="absolute right-0 top-0 bottom-0 bg-primary hover:bg-primary/90 text-white rounded-full px-4 flex items-center justify-center transition-colors">
             <i className="ri-search-line"></i>
           </button>
         </div>

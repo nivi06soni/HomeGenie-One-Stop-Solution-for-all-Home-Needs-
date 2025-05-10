@@ -36,6 +36,17 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Quote Banner */}
+      <div className="bg-gradient-to-r from-primary/10 to-indigo-100 py-3 border-y border-gray-200">
+        <div className="container mx-auto text-center">
+          <p className="text-gray-700 font-medium italic flex items-center justify-center">
+            <i className="ri-double-quotes-l text-primary mr-2 text-lg"></i>
+            On-Demand Home Services at Your Fingertips
+            <i className="ri-double-quotes-r text-primary ml-2 text-lg"></i>
+          </p>
+        </div>
+      </div>
+      
       <main className="flex-grow container mx-auto px-4 py-6">
         {/* Hero Section */}
         <section className="mb-8">
