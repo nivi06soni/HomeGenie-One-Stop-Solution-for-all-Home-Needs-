@@ -54,22 +54,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
 
   // Check if user is already logged in
-  const { isLoading } = useQuery({
+  const { data: userData, isLoading } = useQuery<User | null>({
     queryKey: ["/api/me"],
-    queryFn: getQueryFn({ on401: "returnNull" }),
-    onSuccess: (data) => {
-      if (data) {
-        setUser(data);
-      }
-    },
+    queryFn: getQueryFn({ on401: "returnNull" }) as () => Promise<User | null>,
+    enabled: true,
+    refetchOnWindowFocus: false,
   });
 
-  const loginMutation = useMutation({
-    mutationFn: async (credentials: LoginData) => {
-      const res = await apiRequest("POST", "/api/login", credentials);
-      return res.json();
-    },
-    onSuccess: (userData) => {
+  // Set user data when it's loaded from API
+  useEffect(() => {
+    if (userData) {
+      setUser(userData as User);
+    }
+  }, [userData]);
+
+  async function login(username: string, password: string) {
+    try {
+      const res = await apiRequest("POST", "/api/login", { username, password });
+      const userData = await res.json();
       setUser(userData);
       queryClient.invalidateQueries({ queryKey: ["/api/me"] });
       toast({
@@ -77,45 +79,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         description: `Welcome back, ${userData.fullName}!`,
       });
       navigate("/");
-    },
-    onError: (error: Error) => {
+      return userData;
+    } catch (error: any) {
       toast({
         title: "Login failed",
         description: error.message || "Invalid username or password",
         variant: "destructive",
       });
-    },
-  });
+      throw error;
+    }
+  }
 
-  const registerMutation = useMutation({
-    mutationFn: async (userData: RegisterData) => {
+  async function register(userData: RegisterData) {
+    try {
       const res = await apiRequest("POST", "/api/register", userData);
-      return res.json();
-    },
-    onSuccess: (userData) => {
-      setUser(userData);
+      const newUser = await res.json();
+      setUser(newUser);
       queryClient.invalidateQueries({ queryKey: ["/api/me"] });
       toast({
         title: "Registration successful",
-        description: `Welcome, ${userData.fullName}!`,
+        description: `Welcome, ${newUser.fullName}!`,
       });
       navigate("/");
-    },
-    onError: (error: Error) => {
+      return newUser;
+    } catch (error: any) {
       toast({
         title: "Registration failed",
         description: error.message || "Could not create account",
         variant: "destructive",
       });
-    },
-  });
+      throw error;
+    }
+  }
 
-  const logoutMutation = useMutation({
-    mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/logout", {});
-      return res.json();
-    },
-    onSuccess: () => {
+  async function logout() {
+    try {
+      await apiRequest("POST", "/api/logout", {});
       setUser(null);
       queryClient.invalidateQueries({ queryKey: ["/api/me"] });
       toast({
@@ -123,26 +122,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         description: "You have been logged out successfully",
       });
       navigate("/login");
-    },
-    onError: () => {
+    } catch (error: any) {
       toast({
         title: "Logout failed",
         description: "There was a problem logging out",
         variant: "destructive",
       });
-    },
-  });
-
-  async function login(username: string, password: string) {
-    await loginMutation.mutateAsync({ username, password });
-  }
-
-  async function register(userData: RegisterData) {
-    await registerMutation.mutateAsync(userData);
-  }
-
-  async function logout() {
-    await logoutMutation.mutateAsync();
+      throw error;
+    }
   }
 
   return (
