@@ -8,6 +8,14 @@ interface ProviderCardProps {
 
 export default function ProviderCard({ provider }: ProviderCardProps) {
   const ratingDisplay = provider.rating ? (provider.rating / 10).toFixed(1) : "New";
+  
+  // Format hourly rate to display properly
+  const formatHourlyRate = (rate: unknown) => {
+    if (rate === null || rate === undefined) return "";
+    if (typeof rate === 'number') return rate.toFixed(2);
+    if (typeof rate === 'string') return parseFloat(rate).toFixed(2);
+    return "";
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -43,9 +51,7 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
         {provider.hourlyRate !== null && provider.hourlyRate !== undefined && (
           <div className="bg-blue-50 text-blue-700 px-3 py-1.5 rounded-md font-medium text-sm mb-3 flex items-center">
             <i className="ri-money-rupee-circle-line mr-1.5"></i>
-            <span>₹{typeof provider.hourlyRate === 'number' 
-              ? provider.hourlyRate.toFixed(2) 
-              : String(provider.hourlyRate)}/hour</span>
+            <span>₹{formatHourlyRate(provider.hourlyRate)}/hour</span>
           </div>
         )}
         

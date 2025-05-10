@@ -72,19 +72,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Quick Actions */}
+        {/* Services */}
         <section className="mb-10">
-          <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Services</h2>
+            <Link href="/book">
+              <a className="text-primary font-medium hover:underline flex items-center">
+                View All <i className="ri-arrow-right-line ml-1"></i>
+              </a>
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {categoriesLoading ? (
-              Array(4).fill(0).map((_, i) => (
+              Array(8).fill(0).map((_, i) => (
                 <div key={i} className="flex flex-col items-center">
                   <Skeleton className="w-12 h-12 rounded-full mb-3" />
                   <Skeleton className="h-4 w-20" />
                 </div>
               ))
             ) : (
-              categories?.slice(0, 4).map((category) => (
+              categories?.map((category) => (
                 <ServiceCard key={category.id} category={category} isLink />
               ))
             )}
